@@ -7,6 +7,7 @@ import {
   Image,
 } from "phosphor-react";
 import { gql, useQuery } from "@apollo/client";
+import { TailSpin } from "react-loader-spinner";
 
 import "@vime/core/themes/default.css";
 
@@ -50,7 +51,13 @@ export function Video(props: VideoProps) {
   });
 
   if (!data) {
-    return <div className="flex-1"></div>;
+    return (
+      <div className="flex-1">
+        <div className="flex h-full w-full justify-center items-center">
+          <TailSpin color="#81D8F7" height={80} width={80} />
+        </div>
+      </div>
+    );
   }
 
   return (
