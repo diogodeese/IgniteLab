@@ -1,5 +1,6 @@
 import { CheckCircle, Lock } from "phosphor-react";
 import { isPast, format } from "date-fns";
+import enGB from "date-fns/esm/locale/en-GB";
 import { Link, useParams } from "react-router-dom";
 
 interface LessonProps {
@@ -15,7 +16,10 @@ export function Lesson(props: LessonProps) {
   const isLessonAvailable = isPast(props.availableAt);
   const availableDateFormatted = format(
     props.availableAt,
-    "EEEE' • 'd' 'MMMM' • 'k'h'mm"
+    "EEEE' • 'd' 'MMMM' • 'k'h'mm",
+    {
+      locale: enGB,
+    }
   );
 
   const isActiveLesson = slug === props.slug;
