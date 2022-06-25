@@ -48,13 +48,13 @@ export function Subscribe() {
             className="flex flex-col gap-2 w-full"
           >
             <input
-              className="bg-gray-900 rounded px-5 h-14"
+              className="bg-gray-900 rounded px-5 h-14 hover:outline hover:outline-1 hover:outline-green-500 focus:outline focus:outline-1 focus:outline-green-500"
               type="text"
               placeholder="Full name"
               onChange={(event) => setName(event.target.value)}
             />
             <input
-              className="bg-gray-900 rounded px-5 h-14"
+              className="bg-gray-900 rounded px-5 h-14 hover:outline hover:outline-1 hover:outline-green-500 focus:outline focus:outline-1 focus:outline-green-500"
               type="email"
               placeholder="Your email"
               onChange={(event) => setEmail(event.target.value)}
