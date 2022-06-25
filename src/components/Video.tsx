@@ -8,6 +8,7 @@ import {
 } from "phosphor-react";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 import { TailSpin } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 import "@vime/core/themes/default.css";
 
@@ -16,13 +17,14 @@ interface VideoProps {
 }
 
 export function Video(props: VideoProps) {
-  const { data } = useGetLessonBySlugQuery({
+  const navigate = useNavigate();
+  const { data, loading } = useGetLessonBySlugQuery({
     variables: {
       slug: props.lessonSlug,
     },
   });
 
-  if (!data || !data.lesson) {
+  if (loading) {
     return (
       <div className="flex-1">
         <div className="flex h-full w-full justify-center items-center">
@@ -30,6 +32,10 @@ export function Video(props: VideoProps) {
         </div>
       </div>
     );
+  }
+
+  if (!data || !data.lesson) {
+    return navigate("/404");
   }
 
   return (
