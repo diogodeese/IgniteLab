@@ -717,6 +717,7 @@ export type Challenge = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
+  lesson?: Maybe<Lesson>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -748,6 +749,11 @@ export type ChallengeHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type ChallengeLessonArgs = {
+  locales?: InputMaybe<Array<Locale>>;
 };
 
 
@@ -791,6 +797,7 @@ export type ChallengeConnection = {
 export type ChallengeCreateInput = {
   cl4e8k4ev0anm01xu7gc87fn9?: InputMaybe<LessonCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  lesson?: InputMaybe<LessonCreateOneInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   url: Scalars['String'];
 };
@@ -863,6 +870,7 @@ export type ChallengeManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  lesson?: InputMaybe<LessonWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -934,6 +942,7 @@ export enum ChallengeOrderByInput {
 
 export type ChallengeUpdateInput = {
   cl4e8k4ev0anm01xu7gc87fn9?: InputMaybe<LessonUpdateManyInlineInput>;
+  lesson?: InputMaybe<LessonUpdateOneInlineInput>;
   url?: InputMaybe<Scalars['String']>;
 };
 
@@ -1046,6 +1055,7 @@ export type ChallengeWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  lesson?: InputMaybe<LessonWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1326,6 +1336,7 @@ export type LessonConnection = {
 export type LessonCreateInput = {
   availableAt?: InputMaybe<Scalars['DateTime']>;
   challenge?: InputMaybe<ChallengeCreateOneInlineInput>;
+  cl4t4b0zl2v6j01zchxeo2a91?: InputMaybe<ChallengeCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   lessonType: LessonType;
@@ -1572,6 +1583,7 @@ export enum LessonType {
 export type LessonUpdateInput = {
   availableAt?: InputMaybe<Scalars['DateTime']>;
   challenge?: InputMaybe<ChallengeUpdateOneInlineInput>;
+  cl4t4b0zl2v6j01zchxeo2a91?: InputMaybe<ChallengeUpdateManyInlineInput>;
   description?: InputMaybe<Scalars['String']>;
   lessonType?: InputMaybe<LessonType>;
   slug?: InputMaybe<Scalars['String']>;
@@ -5581,7 +5593,7 @@ export type GetLessonBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetLessonBySlugQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', title: string, videoId: string, description?: string | null, teacher?: { __typename?: 'Teacher', name: string, bio: string, avatarURL: string } | null } | null };
+export type GetLessonBySlugQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', title: string, videoId: string, description?: string | null, teacher?: { __typename?: 'Teacher', name: string, bio: string, avatarURL: string } | null, challenge?: { __typename?: 'Challenge', url: string } | null } | null };
 
 export type GetLessonsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5633,6 +5645,9 @@ export const GetLessonBySlugDocument = gql`
       name
       bio
       avatarURL
+    }
+    challenge {
+      url
     }
   }
 }
