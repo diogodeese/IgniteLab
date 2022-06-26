@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 import { useCreateSubscriberMutation } from "../graphql/generated";
 
-import Code from "../assets/code.png";
+import Code from "../assets/Code.png";
 
 export function Subscribe() {
   const navigate = useNavigate();
