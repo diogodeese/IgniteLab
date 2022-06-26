@@ -9,6 +9,7 @@ import {
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 import { TailSpin } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "@vime/core/themes/default.css";
 
@@ -35,7 +36,14 @@ export function Video(props: VideoProps) {
   }
 
   if (!data || !data.lesson) {
-    return navigate("/404");
+    return (
+      <Link
+        to="/"
+        className="mt-16 p-4 text-sm bg-green-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-green-700 transition-colors"
+      >
+        Home Page
+      </Link>
+    );
   }
 
   return (
