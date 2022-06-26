@@ -8,6 +8,10 @@ import Code from "../assets/Code.png";
 export function Subscribe() {
   const navigate = useNavigate();
 
+  const signInUrl = `https://github.com/login/oauth/authorize?client_id=${
+    import.meta.env.VITE_GITHUB_ID
+  }`;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -69,6 +73,8 @@ export function Subscribe() {
             >
               Secure my spot
             </button>
+
+            <a href={signInUrl}>GitHub Login</a>
           </form>
         </div>
       </div>
